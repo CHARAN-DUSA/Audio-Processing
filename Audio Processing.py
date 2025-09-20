@@ -40,7 +40,7 @@ model = whisper.load_model("small")
 
 
 # HuggingFace token for Pyannote
-HF_TOKEN = " REMOVED"
+HF_TOKEN = os.environ.get("HF_TOKEN")
 # Try loading Pyannote speaker-diarization
 try:
     from pyannote.audio import Pipeline
