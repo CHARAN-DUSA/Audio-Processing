@@ -1,0 +1,29 @@
+<!-- How It Works – Step-by-Step
+1. Initialization
+Connects to MongoDB (myFirstDB) and creates transcripts collection.
+Loads Whisper model for transcription.
+Attempts to load Pyannote for speaker diarization using HuggingFace token.
+
+2. GUI Setup
+Initializes Tkinter window with ScrolledText widget.
+Starts the GUI mainloop in the main thread.
+
+3. Recording
+Audio is captured using sounddevice.InputStream.
+Audio is split into chunks (e.g., 10 seconds).
+Each chunk is pushed into a queue.Queue() for processing.
+
+4. Processing Chunks
+Each chunk is saved as a .wav file.
+Whisper transcribes audio into text.
+Pyannote (if available) labels speakers.
+Transcript segments are stored in MongoDB.
+GUI updates live, displaying speaker and text in real-time.
+
+5. Action Items & Topics Extraction
+Text is analyzed to detect tasks and topics.
+Optional feature to display or save action items separately.
+
+6. PDF Export
+Entire conversation is concatenated into full_transcript_text.
+Saved as a PDF file in the project directory with a timestamped filename. -->

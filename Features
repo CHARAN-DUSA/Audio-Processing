@@ -1,0 +1,51 @@
+<!-- Audio Processing Project – Features
+1. Real-time Audio Recording
+Uses sounddevice to capture live audio from the microphone.
+Records audio in chunks of 10 seconds (configurable via CHUNK_DURATION).
+Each chunk is pushed into a queue for processing without blocking recording.
+
+2. Automatic Transcription (Whisper)
+Uses OpenAI’s Whisper (small) model to transcribe audio into text.
+Supports full transcript text and segments with timestamps.
+Automatically handles FP32 conversion if FP16 is not supported on CPU.
+
+3. Speaker Diarization (Optional with Pyannote)
+Detects “who spoke when” in the audio.
+Assigns unique random colors to each speaker for clarity in the GUI.
+Can be skipped if Pyannote pipeline fails or HuggingFace token is missing.
+
+4. MongoDB Storage
+Stores conversation segments in MongoDB:
+conversation_id
+speaker
+start_time & end_time
+text
+created_at timestamp
+Supports multiple databases: admin, config, local, myFirstDB, studentDB.
+Allows querying and later analysis of conversations.
+
+5. GUI Visualization
+Built with Tkinter and ScrolledText.
+Displays transcripts live as the audio is processed.
+Colors speakers differently using random hex colors.
+Scrolls automatically to the latest transcript.
+
+6. Action Items & Topics Extraction
+Uses nltk.sent_tokenize to split text into sentences.
+Action items: sentences with keywords like todo, must, follow up.
+Topics: top N frequent words longer than 3 letters.
+
+7. PDF Export
+Converts the transcript into a PDF using FPDF.
+Each speaker line can be preserved in the PDF (optional color formatting).
+File is automatically named based on timestamp:
+transcript_meeting_YYYYMMDDHHMMSS.pdf
+
+8. Multithreading
+Separates recording and processing using Python threads:
+Thread 1: records audio continuously.
+Thread 2: processes audio chunks (transcription, diarization, MongoDB insert, GUI update).
+
+9. Timestamped Conversations
+Each conversation is uniquely identified by:
+conv_id = f"meeting_{datetime.datetime.now(datetime.timezone.utc).strftime('%Y%m%d%H%M%S')}" -->
